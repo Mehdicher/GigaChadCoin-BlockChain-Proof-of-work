@@ -1,0 +1,33 @@
+{
+   "height": 4,
+   "hash": "00bdf904505b67a56e6232de100e618e7f28347e8cff05e7ca71acb7b60e61a2",
+   "previousHash": "045553be0b3b13d2edbc8bfb624789aeef1bc804b98bfc40f9e1dcb5892559d8",
+   "timestamp": 1749691689629,
+   "difficulty": 1,
+   "reward": 50,
+   "nonce": 46,
+   "miner": "Mehdi",
+   "transactions": [
+      {
+         "sender": "COINBASE",
+         "recipient": "Mehdi",
+         "amount": 50,
+         "fee": 0,
+         "signature": "COINBASE"
+      },
+      {
+         "sender": "Mehdi",
+         "recipient": "Sh4d0w",
+         "amount": 1,
+         "fee": 1,
+         "signature": "60c2e36fd9c85319d8f7dcb0d1dcf180cc412c91015fc1622f318cfbbb1f6cd5ef43cc47c909d3f6eb98eda55c6b24cee5e07f478756477a2623c749a0c7d717c6c0b54fddbf5e73c18f38bd90239bbfe5a5c4f898dbc91804c1d9a0d79713e265ed2d8b92b3c51b5cc17ec40a605f0696d27dd463a030af9ca94d82705eb36326fd58744143934ee85f1b48d54e7650e6371ecaacf319272346a2dd8b49d01dbc07c05ef661f34e109be505a6687765b05fac9c146ac760e88fe4eaf7c9912b4ab91b7e6584170cc4e8b7b8a151cf6503b92a8175780a9c23295a3c6d27ca31f179814581896098a52dace2d6623cadcab4355f2de7a9266c72fb4b574c5f70"
+      },
+      {
+         "sender": "Mehdi",
+         "recipient": "Sh4d0w",
+         "amount": 2,
+         "fee": 1,
+         "signature": "4e109ac5a91f25801ee482dab3fc8a3c60be52b2e83c5590944628a29df77098f985f96a5c58dc7d75c497ca2815e882a07fed5cf43ea0aa4af5df9d5de2e803ab1c5717215cf51e7b2554dfaf820e6a80cc2fa8abfb04b615930865d558edd7029fa61f07054c44ade9cd8b8b2b6c3cbde516d6620fe05d1b63cadd311b622643980303ec1c0965ac1ecb8f4fe19d09d7093723abda334928f1022ccdf1a8ac22964fbb401b7ae750dcd1be2ac6d556fbe55530880a0634f6b4acab0583eb20ff37978acf44a9bbf373ae332e61f799d05099ae563e19b8fd6df54bcc3465ced3839bb3bef21068eb914c1c7ca38cac59681c08de192d1134ee0a01d6a04b6f"
+      }
+   ]
+}

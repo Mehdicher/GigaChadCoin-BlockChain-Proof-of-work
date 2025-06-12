@@ -1,0 +1,26 @@
+{
+   "height": 3,
+   "hash": "045553be0b3b13d2edbc8bfb624789aeef1bc804b98bfc40f9e1dcb5892559d8",
+   "previousHash": "031eb3749aa4e82c2c37fdad56b6f8bd921edad91d9f6cd8f1470603282d4cea",
+   "timestamp": 1749689394424,
+   "difficulty": 1,
+   "reward": 50,
+   "nonce": 10,
+   "miner": "Sh4d0w",
+   "transactions": [
+      {
+         "sender": "COINBASE",
+         "recipient": "Sh4d0w",
+         "amount": 50,
+         "fee": 0,
+         "signature": "COINBASE"
+      },
+      {
+         "sender": "Sh4d0w",
+         "recipient": "Sh4d0w",
+         "amount": 1,
+         "fee": 10,
+         "signature": "a6cdeedf38e7f4d23dad4066051602fef5a5611acc4061ceb7a602928bdbaf7349b83e6ea88052275926c1181ccefb77435ca320fb9ea9a88697c504fca7103486e4bff7555c11a725ea7dab281f25c0bd88dc22ccf4ad2304a8b4368bccbdc434f15afecef8431ed3b97322f460a4493d766416a7b3f771dcc0c200b7df80e5896b67e58ec306fc1920a01363df341ada2db5cb229dcc1bb3d93ba73279b79eb8db5cb90794d42583deb60c146692af2d5aa685343587da5a4da71fc798a552955020aeabc1b643a490a25ec870cfb8879adf149a4dff7258282b253e7e7cb236a92409a59752ab2b21d789c7be4eee53a790d47fecca7003752b0c816cdd11"
+      }
+   ]
+}

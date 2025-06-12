@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GigachadCoin Dashboard</title>
+
+  <!-- Inter font -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --primary:#220760;        /* indigo-400 */
+      --primary-dark:#7C3AED;   /* indigo-600 */
+      --accent:#FBBF24;         /* amber-400  */
+
+      --bg:#111827;             /* gray-900   */
+      --card:#1F2937;           /* gray-800   */
+      --border:#374151;         /* gray-700   */
+      --body:#D1D5DB;           /* gray-300   */
+      --heading:#F3F4F6;        /* gray-100   */
+
+      --radius:.75rem;
+      --shadow:0 4px 12px rgba(0,0,0,.4);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0;}
+    body{
+      font-family:Inter,sans-serif;
+      background:var(--bg);
+      color:var(--body);
+    }
+
+    header{
+      color:#fff;
+      text-align:center;
+      padding:1.5rem;
+      background:linear-gradient(90deg,var(--primary-dark),var(--primary));
+      box-shadow:var(--shadow);
+    }
+    header h1{letter-spacing:.03em;font-size:1.85rem;}
+
+    /* ==== GRID LAYOUT ==== */
+    main{
+      max-width:1200px;
+      margin:2rem auto;
+      display:grid;
+      gap:1.5rem;
+      padding:0 1rem;
+      grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    }
+    section{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:1.5rem;
+      box-shadow:0 2px 6px rgba(227, 208, 208, 0.35);
+      transition:.18s transform,.18s box-shadow;
+    }
+    section:hover{
+      transform:translateY(-3px);
+      box-shadow:var(--shadow);
+    }
+    /* NEW: make Blocks Chain span full grid width */
+    #blocksSection{
+      grid-column:1 / -1;
+      width:100%;
+    }
+
+    h2{
+      margin-bottom:1rem;
+      font-size:1.25rem;
+      color:var(--heading);
+      display:flex;align-items:center;gap:.3rem;
+    }
+
+    label{font-weight:600;font-size:.9rem;display:inline-block;margin-top:.4rem;color:var(--heading);}
+    input,select{
+      width:100%;padding:.6rem .75rem;font-size:.95rem;margin-top:.25rem;
+      border:1px solid var(--border);border-radius:.55rem;background:var(--border);color:var(--body);
+    }
+    input:focus,select:focus{
+      outline:none;border-color:var(--primary);
+      box-shadow:0 0 0 3px rgba(246, 182, 92, 0.25);
+    }
+    button{
+      margin-top:.8rem;padding:.75rem 1.2rem;border:none;border-radius:.55rem;
+      background:var(--primary);color:#fff;font-weight:600;cursor:pointer;
+      transition:.18s background,.1s transform;
+    }
+    button:hover{background:var(--primary-dark);}
+    button:active{transform:scale(.96);}
+    .muted{color:#9CA3AF;font-size:.88rem;margin-top:.6rem;}
+
+    /* ==== SMALL LIST CARDS ==== */
+    .list{display:flex;flex-direction:column;gap:1.1rem;}
+    .card-sm{
+      border:1px solid var(--border);
+      border-radius:.55rem;
+      padding:.75rem .9rem;
+      font-size:.88rem;
+      background:#273549;
+    }
+
+    /* ==== BLOCK CHAIN VIEW ==== */
+    #blockChainWrapper{overflow-x:auto;padding-bottom:1rem;}
+    #blockList{
+      display:flex;
+      gap:2rem;          /* chain spacing */
+      padding-bottom:.5rem;
+      background:none;   /* kill faint gradient “zipper” */
+    }
+    .block-card{
+      position:relative;
+      flex-shrink:0;
+      min-width:320px;        /* flexible, never collapses */
+      max-width:460px;
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:1.1rem 1.4rem;
+      box-shadow:0 2px 6px rgba(0,0,0,.35);
+    }
+    .block-card h3{
+      font-size:1.05rem;
+      margin-bottom:.9rem;
+      color:var(--heading);
+      display:flex;align-items:center;gap:.4rem;
+    }
+    .block-card p{
+      margin:.45rem 0;
+      font-size:.86rem;
+      line-height:1.45;
+      word-break:break-all;
+    }
+    .tx{
+      border-left:3px solid var(--accent);
+      padding-left:.75rem;
+      margin:1.05rem 0;
+    }
+    .tx p{margin:.32rem 0;}
+
+    /* connector */
+    .block-card:not(:last-child)::after{
+      content:'';
+      position:absolute;
+      top:50%;right:-1rem;
+      width:1rem;height:2px;
+      background:var(--accent);
+    }
+    #blocksSection{
+      text-align:center;                 /* centre inline content             */
+    }
+
+    #blocksSection h2{
+      justify-content:center;            /* icon + text stay together         */
+    }
+
+    #blocksSection > button{
+      display:inline-flex;               /* keeps icon & label inline-flex    */
+      margin:0.75rem auto 1.25rem auto;  /* auto L/R centres the button       */
+    }
+  </style>
+</head>
+
+<body>
+<header><h1>🦾 GigaChadCoin</h1></header>
+
+<main>
+  <!-- Wallet -->
+  <section>
+    <h2>👛 Wallet</h2>
+    <label for="walletSelect">Select wallet</label>
+    <select id="walletSelect" onchange="updateSenderField()"></select>
+    <p id="balanceDisplay">Balance : 0 GGC</p>
+    <input type="hidden" id="sender">
+  </section>
+
+  <!-- New Transaction -->
+  <section>
+    <h2>➕ Create Transaction</h2>
+    <form onsubmit="submitTransaction(event)">
+      <label for="recipient">Recipient</label>
+      <input id="recipient" type="text">
+
+      <label for="amount">Amount</label>
+      <input id="amount" type="number">
+
+      <label for="fee">Fee</label>
+      <input id="fee" type="number">
+
+      <button type="submit">Submit transaction</button>
+      <div id="txStatus" class="muted"></div>
+    </form>
+  </section>
+
+  <!-- Mempool -->
+  <section>
+    <h2>📥 Mempool</h2>
+    <div id="mempoolList" class="list"></div>
+  </section>
+
+  <!-- Block chain -->
+  <section id="blocksSection">
+    <h2>📦 Blocks Chain</h2>
+    <button onclick="mine()">⛏️ Mine block</button>
+
+    <!-- horizontal scroll wrapper -->
+    <div id="blockChainWrapper">
+      <div id="blockList" style="margin-top:1.2rem;"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+  /* CONSTANTS */
+  const BLOCK_REWARD = 50;
+
+  /* Helpers */
+  const $ = id => document.getElementById(id);
+  const fetchJSON = url => fetch(url).then(r=>r.json());
+  const abbreviate = (s,l=8)=>s.length>l?s.slice(0,l)+'…':s;
+
+  /* Crypto helpers (unchanged) */
+  const pemToArrayBuffer = pem=>{
+    const b64=pem.replace(/-----(BEGIN|END) PRIVATE KEY-----/g,'').replace(/\s+/g,'');
+    const bin=atob(b64), buf=new ArrayBuffer(bin.length), v=new Uint8Array(buf);
+    for(let i=0;i<bin.length;i++) v[i]=bin.charCodeAt(i);
+    return buf;
+  };
+  const bufferToHex = buf=>Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
+  const keyCache={};
+  async function importPrivateKey(pem){
+    return crypto.subtle.importKey('pkcs8',pemToArrayBuffer(pem),
+      {name:'RSASSA-PKCS1-v1_5',hash:'SHA-256'},false,['sign']);
+  }
+  async function getPrivateCryptoKey(sender){
+    const id=sender.toLowerCase();
+    if(!keyCache[id]){
+      const res=await fetch(`/keys/${id}/private`);
+      if(!res.ok) throw new Error('No private key');
+      keyCache[id]=await importPrivateKey(await res.text());
+    }
+    return keyCache[id];
+  }
+  async function signTransaction(unsigned){
+    const data=new TextEncoder().encode(JSON.stringify(unsigned));
+    const digest=await crypto.subtle.digest('SHA-256',data);
+    const priv=await getPrivateCryptoKey(unsigned.sender);
+    const sig=await crypto.subtle.sign({name:'RSASSA-PKCS1-v1_5'},priv,digest);
+    return bufferToHex(sig);
+  }
+
+  /* Wallet */
+  async function updateSenderField(){
+    const sender=$("walletSelect").value;
+    $("sender").value=sender;
+    const bals=await fetchJSON("/wallets");
+    $("balanceDisplay").innerText=`Balance: ${(bals[sender]||0)} GGC`;
+  }
+
+  /* Transactions */
+  async function submitTransaction(e){
+    e.preventDefault();
+    const unsigned={
+      sender:$("sender").value,
+      recipient:$("recipient").value,
+      amount:+$("amount").value,
+      fee:+$("fee").value
+    };
+    let signature;
+    try{signature=await signTransaction(unsigned);}
+    catch(err){return alert("Signing error, see console");}
+    const tx={...unsigned,signature};
+    const res=await fetch("/transactions/new",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify(tx)});
+    const data=await res.json();
+    $("txStatus").innerText=data.message||"Transaction sent ✔️";
+    loadMempool();
+  }
+
+  /* Mempool */
+  function renderMempool(pool){
+    const box=$("mempoolList"); box.innerHTML='';
+    if(!pool.length){box.innerHTML='<p class="muted">Mempool empty ✔️</p>';return;}
+    pool.forEach(tx=>{
+      const d=document.createElement('div');
+      d.className='card-sm';
+      d.innerHTML=`<strong>${abbreviate(tx.id||'tx')}</strong> · ${tx.amount} GGC<br>
+                   <span class="muted">from</span> ${abbreviate(tx.sender)}<br>
+                   <span class="muted">to</span> ${abbreviate(tx.recipient)} &nbsp; |&nbsp; fee ${tx.fee}`;
+      box.appendChild(d);
+    });
+  }
+  const loadMempool=()=>fetchJSON("/mempool").then(renderMempool);
+
+  /* Blocks */
+  const txMarkup = t => `
+    <div class="tx">
+      <p><strong>From:</strong> ${t.sender}</p>
+      <p><strong>To:</strong> ${t.recipient}</p>
+      <p><strong>Amount:</strong> ${t.amount} GGC</p>
+      <p><strong>Fee:</strong> ${t.fee}</p>
+    </div>`;
+
+  function blockMarkup(b){
+    const number=b.index??b.height??'?';
+    const reward=(b.reward??BLOCK_REWARD)+' GGC';
+    return `<div class="block-card">
+              <h3>🔶 Block #${number}</h3>
+              <p><strong>Hash:</strong> ${b.hash}</p>
+              <p><strong>Prev Hash:</strong> ${b.previousHash}</p>
+              <p><strong>Time:</strong> ${new Date(b.timestamp).toLocaleString()}</p>
+              <p><strong>Difficulty:</strong> ${b.difficulty} | <strong>Nonce:</strong> ${b.nonce}</p>
+              <p><strong>Miner:</strong> ${b.miner} | <strong>Reward:</strong> ${reward}</p>
+              <p style="margin-top:1rem;"><strong>Transactions:</strong></p>
+              ${b.transactions.map(txMarkup).join('')}
+            </div>`;
+  }
+  function renderBlocks(blocks){
+    const box=$("blockList"); box.innerHTML='';
+    if(!blocks.length){box.innerHTML='<p class="muted">No blocks yet</p>';return;}
+    blocks.slice(-15).forEach(b=>box.insertAdjacentHTML('beforeend',blockMarkup(b)));
+  }
+  const loadBlocks=()=>fetchJSON("/blocks").then(renderBlocks);
+
+  /* Mining */
+  async function mine(){
+    const miner=$("walletSelect").value;
+    const res=await fetch("/mine",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({miner})});
+    const data=await res.json();
+    alert(data.message);
+    loadMempool(); loadBlocks();
+  }
+
+  /* Init */
+  (async()=>{
+    const wallets=Object.keys(await fetchJSON("/wallets"));
+    wallets.forEach(w=>{
+      const o=document.createElement('option');o.value=w;o.textContent=w;$("walletSelect").appendChild(o);
+    });
+    await updateSenderField();
+    loadMempool(); loadBlocks();
+  })();
+</script>
+</body>
+</html>

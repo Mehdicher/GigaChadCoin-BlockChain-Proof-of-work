@@ -1,0 +1,40 @@
+{
+   "height": 2,
+   "hash": "031eb3749aa4e82c2c37fdad56b6f8bd921edad91d9f6cd8f1470603282d4cea",
+   "previousHash": "000000044b97d90aec236d4184e93800560a8f9801d8edf93ee5eece0344fb19",
+   "timestamp": 1749689266769,
+   "difficulty": 1,
+   "reward": 50,
+   "nonce": 0,
+   "miner": "Mehdi",
+   "transactions": [
+      {
+         "sender": "COINBASE",
+         "recipient": "Mehdi",
+         "amount": 50,
+         "fee": 0,
+         "signature": "COINBASE"
+      },
+      {
+         "sender": "Mehdi",
+         "recipient": "Sh4d0w",
+         "amount": 1,
+         "fee": 15,
+         "signature": "5aef57a7042147cb283b9889668f63bee323270c9a5f464ae5dd6dba24a90f103ad4c5dfdced66b263f332f5066d6df8ad23148cdf629842e71ccb43462e29a95be8c0f7b45824867a94c30c920bb0b4df9a9e784a0541d1d30160ba58288840f53270d2b89eb1b0052e9acb72ca98c8fa0d50cc8124116510a2688c5b0876fc77bb263df42e1eeaba70f0c1f17e417b67ed81d0b5e16fa7ec4981606b20f16088c090dd3ff2848fd174bfa4ba6d8396a4c884512cea159f68df38e6a1c4c2841f899b8f0822722942b201d560f49e4070223c99c5fc15e8dadcdf27d7368ff2e3e2d5c37b56008e20b0c9e661bfe26da91c459ac4e226c08c4c22b87b0691d5"
+      },
+      {
+         "sender": "Mehdi",
+         "recipient": "Sh4d0w",
+         "amount": 50,
+         "fee": 1,
+         "signature": "848bfd0eaab8ef72a140137e4664e1230c19d07b42cbe744632f6ccd8263fb6c108a6c880418ad992b0307c758ec4c9acf08404595519e4c27eefa86af2e851cbd3178e0380740f68c8a975ca0b3e69657da579edb5fecd2b4c0270395c964812a0e90f67a093930067f22f8d725e2dc8128b85df5d9651f060036f3bd5177a79b6fd483ecabc13f9d4f4565c51f39432e56e007bfbcdd418d385b53700ca3d0ee9703e7036e2b89cfdb5e16a217001e0489afe818e6cc1cc90529ee84988eb08e4791a69a5dfdc46777639f8083a4c06988d5c27c98a40c7555a6b5973454cd1be46e6ac0a6e29dabc6f643e72bfc71935f4c6f100f6466a37dbc3659918e41"
+      },
+      {
+         "sender": "Mehdi",
+         "recipient": "Sh4d0w",
+         "amount": 5,
+         "fee": 1,
+         "signature": "89c2d608950be750fd4460a74b80a10c42dcec1ddd2836fcd5fc6037fed48f2b2fc7bb6bea3c38e116fc34bfbe197782fc943d0c4944bbdff2260789ea5f54e2590deecd8567bb610278f35c6ea2b346880a5ac637a14da38d09dd8de2aa8c1757c5fabbbffba2fbfde3295862c7d33a967c3e432f9b38a68a6c89083a4227e2582ee25795d0f20aadfddafdb58fb6de2e8e819e1db414f7e9862418199b8bcd8f4dab1491ef5d1f60f684efe0577cef4d87bce164a0ffeaf1c1f54b0e744f4269936fddf62b5460cf7e08dc893f3e25cf7870ebd0760e8f08cdc5a55b4cd08d90569d45efae1cf3fe069d0ad8b09b9164c0ebd8ea9b4b28900c677b0a09cebb"
+      }
+   ]
+}
